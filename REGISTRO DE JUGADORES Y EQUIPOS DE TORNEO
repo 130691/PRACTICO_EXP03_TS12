@@ -1,0 +1,82 @@
+using System;
+using System.Collections.Generic;
+
+public class ProgramaTorneo
+{
+    // Clase para representar un Jugador
+    public class Jugador
+    {
+        public string Nombre { get; set; }
+        public int Edad { get; set; }
+
+        public Jugador(string nombre, int edad)
+        {
+            Nombre = nombre;
+            Edad = edad;
+        }
+
+        public override string ToString()
+        {
+            return $"{Nombre} (Edad: {Edad})";
+        }
+    }
+
+    // Clase para representar un Equipo
+    public class Equipo
+    {
+        public string Nombre { get; set; }
+        public HashSet<Jugador> Jugadores { get; set; }
+
+        public Equipo(string nombre)
+        {
+            Nombre = nombre;
+            Jugadores = new HashSet<Jugador>();
+        }
+
+        public void AgregarJugador(Jugador jugador)
+        {
+            Jugadores.Add(jugador);
+        }
+
+        public override string ToString()
+        {
+            return $"{Nombre}";
+        }
+    }
+
+    public static void Main(string[] args)
+    {
+        // Crear equipos
+        Equipo equipoA = new Equipo("Equipo A");
+        Equipo equipoB = new Equipo("Equipo B");
+
+        // Crear jugadores
+        Jugador jugador1 = new Jugador("Juan", 25);
+        Jugador jugador2 = new Jugador("Pedro", 28);
+        Jugador jugador3 = new Jugador("Maria", 23);
+        Jugador jugador4 = new Jugador("Ana", 30);
+
+        // Agregar jugadores a los equipos
+        equipoA.AgregarJugador(jugador1);
+        equipoA.AgregarJugador(jugador2);
+        equipoB.AgregarJugador(jugador3);
+        equipoB.AgregarJugador(jugador4);
+
+        // Mostrar información de los equipos y sus jugadores
+        MostrarEquiposYJugadores(new List<Equipo> { equipoA, equipoB });
+    }
+
+    // Método para mostrar equipos y jugadores
+    private static void MostrarEquiposYJugadores(List<Equipo> equipos)
+    {
+        foreach (var equipo in equipos)
+        {
+            Console.WriteLine($"Equipo: {equipo}");
+            foreach (var jugador in equipo.Jugadores)
+            {
+                Console.WriteLine($"  Jugador: {jugador}");
+            }
+            Console.WriteLine();
+        }
+    }
+}
